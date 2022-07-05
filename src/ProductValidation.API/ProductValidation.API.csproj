@@ -14,4 +14,8 @@
       <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.6" />
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\..\ProductValidation.Core\ProductValidation.Core.csproj" />
+    </ItemGroup>
+
 </Project>
