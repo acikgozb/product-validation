@@ -15,7 +15,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\ProductValidation.Core\ProductValidation.Core.csproj" />
+      <ProjectReference Include="..\ProductValidation.Core\ProductValidation.Core.csproj" />
     </ItemGroup>
 
 </Project>
