@@ -1,8 +1,10 @@
-﻿namespace ProductValidation.Core.Contracts;
+﻿using FluentValidation.Results;
+
+namespace ProductValidation.Core.Contracts;
 
 public interface IModelValidator
 {
-    public void Validate<T>(T modelToValidate);
+    public ValidationResult Validate<T>(T modelToValidate);
     
-    public Task ValidateAsync<T>(T modelToValidate);
+    public Task<ValidationResult> ValidateAsync<T>(T modelToValidate);
 }
