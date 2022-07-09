@@ -12,6 +12,7 @@ builder.Services.Configure<ApiBehaviorOptions>(options => { options.SuppressMode
 builder.Services.AddControllers(options =>
 {
     options.SuppressImplicitRequiredAttributeForNonNullableReferenceTypes = true;
+    options.Filters.Add<ModelBindingValidationActionFilter>();
 });
 
 builder.Services.AddScoped<IModelValidator, ProductValidationService>();
