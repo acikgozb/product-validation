@@ -1,42 +1,33 @@
 using Microsoft.AspNetCore.Mvc;
 using ProductValidation.Core.Contracts;
-using ProductValidation.Core.Dtos;
+using ProductValidation.Core.Models.Dtos;
 
-namespace ProductValidation.API.Controllers
+namespace ProductValidation.API.Controllers;
+
+[Route("api/products")]
+[ApiController]
+public class ProductsController : ControllerBase
 {
-    [Route("api/products")]
-    [ApiController]
-    public class ProductsController : ControllerBase
+    private readonly IModelValidator _modelValidator;
+    
+    public ProductsController(IModelValidator modelValidator)
     {
-        private readonly IModelValidator _modelValidator;
+        _modelValidator = modelValidator;
+    }
+
+    [HttpGet]
+    public IActionResult GetProducts()
+    {
+        //TODO: Implement this endpoint after POST endpoint + DB implementation
+        throw new NotImplementedException();
+    }
 
 
-        public ProductsController(IModelValidator modelValidator)
-        {
-            _modelValidator = modelValidator;
-        }
-
-        [HttpGet]
-        public IActionResult GetProducts()
-        {
-            //TODO: Implement this endpoint after POST endpoint + DB implementation
-            throw new NotImplementedException();
-        }
-
-        [HttpPost]
-        public IActionResult AddProduct(ProductRequestDto productRequestDto)
-        {
-            /*
-             * TODO:
-             * ProductRequestDto
-             * Product Entity
-             */
-            /*
-             * If validation passes, map DTO to entity and save it to DB.
-             */
-            _modelValidator.Validate(productRequestDto);
-            throw new NotImplementedException();
-        }
-        
+    //If validation passes, map DTO to entity and save it to DB.
+    [HttpPost]
+    [Consumes("application/json")]
+    public IActionResult AddProduct(ProductRequestDto productRequestDto)
+    {
+        throw new NotImplementedException();
     }
 }
