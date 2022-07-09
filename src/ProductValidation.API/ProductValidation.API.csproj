@@ -7,18 +7,18 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="Controllers" />
+        <Folder Include="Controllers" />
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="FluentValidation.AspNetCore" Version="11.1.2" />
-      <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0-preview.5.22301.12" />
-      <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0-preview.5.22301.12" />
-      <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.6" />
+        <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.1.0" />
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0-preview.5.22301.12" />
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0-preview.5.22301.12" />
+        <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.6" />
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\ProductValidation.Core\ProductValidation.Core.csproj" />
+        <ProjectReference Include="..\ProductValidation.Core\ProductValidation.Core.csproj" />
     </ItemGroup>
 
 </Project>
