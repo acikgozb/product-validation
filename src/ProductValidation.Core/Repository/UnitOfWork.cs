@@ -1,7 +1,6 @@
 ﻿using ProductValidation.Core.Contracts;
-using ProductValidation.Core.Repository;
 
-namespace ProductValidation.Core.Models;
+namespace ProductValidation.Core.Repository;
 
 public class UnitOfWork : IUnitOfWork
 {
