@@ -4,11 +4,11 @@ using ProductValidation.Core.Contracts;
 
 namespace ProductValidation.Core.Services;
 
-public class ProductValidationService : IModelValidator
+public class ModelValidator : IModelValidator
 {
     private readonly IServiceProvider _serviceProvider;
 
-    public ProductValidationService(IServiceProvider serviceProvider)
+    public ModelValidator(IServiceProvider serviceProvider)
     {
         _serviceProvider = serviceProvider;
     }
