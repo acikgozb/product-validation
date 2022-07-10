@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using ProductValidation.Core.Contracts;
 using ProductValidation.Core.Models;
 using ProductValidation.Core.Models.Dtos;
+using ProductValidation.Core.Services;
 
 namespace ProductValidation.API.Controllers;
 
@@ -9,11 +10,13 @@ namespace ProductValidation.API.Controllers;
 [ApiController]
 public class ProductsController : ControllerBase
 {
-    private readonly IModelValidator _modelValidator;
+    private readonly IProductService _productService;
+    private readonly IProductValidationService _productValidationService;
 
-    public ProductsController(IModelValidator modelValidator)
+    public ProductsController(IProductService productService, IProductValidationService productValidationService)
     {
-        _modelValidator = modelValidator;
+        _productService = productService;
+        _productValidationService = productValidationService;
     }
 
     [HttpGet]
@@ -25,23 +28,16 @@ public class ProductsController : ControllerBase
 
     [HttpPost]
     [Consumes("application/json")]
-    public IActionResult AddProduct(ProductRequestDto productRequestDto)
+    public async Task<IActionResult> AddProduct(ProductRequestDto productRequestDto)
     {
-        var validationResult = _modelValidator.Validate(productRequestDto);
-        if (!validationResult.IsValid)
+        var validationResult = _productValidationService.ValidateProduct(productRequestDto);
+        if (validationResult.Count > 0)
         {
-            var fieldValidationResult = validationResult.Errors.ConvertAll(validationFailure =>
-                new FieldValidationResult
-                {
-                    FieldName = validationFailure.PropertyName,
-                    ErrorMessage = validationFailure.ErrorMessage
-                });
-
-            return BadRequest(fieldValidationResult);
+            return BadRequest(validationResult);
         }
-        
-        //Valid DTO model -> call service to handle business logic.
 
+        await _productService.AddProductAsync(productRequestDto);
+        
         throw new NotImplementedException();
     }
 }
