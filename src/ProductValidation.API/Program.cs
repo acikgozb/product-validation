@@ -1,13 +1,23 @@
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using ProductValidation.API.Filters;
 using ProductValidation.Core.Contracts;
+using ProductValidation.Core.Repository;
 using ProductValidation.Core.Services;
 using ProductValidation.Core.Validators;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.Configure<ApiBehaviorOptions>(options => { options.SuppressModelStateInvalidFilter = true; });
+
+builder.Services.AddDbContext<ProductValidationContext>(options =>
+{
+    options.UseSqlServer(
+        builder.Configuration.GetConnectionString("DefaultConnection"),
+        optionsBuilder => optionsBuilder.MigrationsAssembly("ProductValidation.API")
+    );
+});
 
 builder.Services.AddControllers(options =>
 {
