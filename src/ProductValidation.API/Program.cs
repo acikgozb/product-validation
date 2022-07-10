@@ -15,7 +15,9 @@ builder.Services.AddControllers(options =>
     options.Filters.Add<ModelBindingValidationActionFilter>();
 });
 
-builder.Services.AddScoped<IModelValidator, ProductValidationService>();
+builder.Services.AddScoped<IModelValidator, ModelValidator>();
+builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddScoped<IProductValidationService, ProductValidationService>();
 builder.Services.AddValidatorsFromAssemblyContaining<ProductRequestDtoValidator>();
 
 var app = builder.Build();
