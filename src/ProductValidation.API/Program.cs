@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ProductValidation.API.Filters;
 using ProductValidation.Core.Contracts;
+using ProductValidation.Core.Models;
 using ProductValidation.Core.Repository;
 using ProductValidation.Core.Services;
 using ProductValidation.Core.Validators;
@@ -28,6 +29,7 @@ builder.Services.AddControllers(options =>
 builder.Services.AddScoped<IModelValidator, ModelValidator>();
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<IProductValidationService, ProductValidationService>();
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddValidatorsFromAssemblyContaining<ProductRequestDtoValidator>();
 
 var app = builder.Build();
