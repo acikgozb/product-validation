@@ -1,19 +1,15 @@
 ﻿using FluentValidation;
+using ProductValidation.Core.Contracts;
 using ProductValidation.Core.Models;
 
 namespace ProductValidation.Core.Validators;
 
 public class ProductValidator : AbstractValidator<Product>
 {
-    public ProductValidator()
+    public ProductValidator(IProductDataGateway productDataGateway)
     {
-        //Contains business model validations
         RuleFor(p => p.Barcode)
-            .MustAsync(async (barcode, cancellationToken) =>
-            {
-                // TODO acikgozb: check if product exists for given barcode.
-                return true;
-            })
-            .WithMessage("A product with {PropertyValue} already exists.");
+            .MustAsync(async (barcode, cancellationToken) => !await productDataGateway.IsProductExistByBarcode(barcode!.Value))
+            .WithMessage("A product with {PropertyValue} barcode already exists.");
     }
 }
