@@ -6,7 +6,7 @@ public class ProductRequestDto
 
     public string? Brand { get; set; }
 
-    public int? Barcode { get; set; }
+    public string? Barcode { get; set; }
 
     public string? Description { get; set; }
 }
