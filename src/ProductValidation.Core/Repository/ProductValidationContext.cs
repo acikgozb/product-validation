@@ -10,4 +10,8 @@ public class ProductValidationContext : DbContext
     }
 
     public DbSet<Product> Products { get; set; }
+    
+    public DbSet<BarcodeLength> BarcodeLengths { get; set; }
+    
+    public DbSet<BannedWord> BannedWords { get; set; }
 }
