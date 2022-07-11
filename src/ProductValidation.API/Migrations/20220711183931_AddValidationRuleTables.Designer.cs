@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProductValidation.Core.Repository;
 
@@ -10,9 +11,11 @@ using ProductValidation.Core.Repository;
 namespace ProductValidation.API.Migrations
 {
     [DbContext(typeof(ProductValidationContext))]
-    partial class ProductValidationContextModelSnapshot : ModelSnapshot
+    [Migration("20220711183931_AddValidationRuleTables")]
+    partial class AddValidationRuleTables
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
