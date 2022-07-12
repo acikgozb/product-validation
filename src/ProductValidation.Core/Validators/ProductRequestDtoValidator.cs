@@ -13,7 +13,7 @@ public class ProductRequestDtoValidator : AbstractValidator<ProductRequestDto>
             .WithMessage("This field cannot be empty.")
             .MinimumLength(5)
             .WithMessage("The entered value '{PropertyValue}' must be at least {MinLength} characters.")
-            .Must(name => name?.All(char.IsLetter) ?? false)
+            .Must(name => name?.All(c => char.IsLetter(c) || char.IsWhiteSpace(c)) ?? false)
             .WithMessage("This field can only contain letters.");
 
         RuleFor(dto => dto.Barcode)
