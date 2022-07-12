@@ -35,4 +35,9 @@ public class ProductService : IProductService
 
         return addedProduct;
     }
+
+    public Task<List<Product>> GetProductsAsync()
+    {
+        return _productDataGateway.GetProductsAsync();
+    }
 }

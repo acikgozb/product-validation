@@ -18,10 +18,10 @@ public class ProductsController : ControllerBase
     }
 
     [HttpGet]
-    public IActionResult GetProducts()
+    public async Task<IActionResult> GetProducts()
     {
-        //TODO: Implement this endpoint after POST endpoint + DB implementation
-        throw new NotImplementedException();
+        var products = await _productService.GetProductsAsync();
+        return Ok(products);
     }
 
     [HttpPost]

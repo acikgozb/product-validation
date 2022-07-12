@@ -23,4 +23,9 @@ public class ProductDataGateway : IProductDataGateway
         var productEntry = _dbContext.Products.Add(product);
         return productEntry.Entity;
     }
+
+    public Task<List<Product>> GetProductsAsync()
+    {
+        return _dbContext.Products.ToListAsync();
+    }
 }

@@ -7,4 +7,6 @@ namespace ProductValidation.Core.Contracts;
 public interface IProductService
 {
     public Task<OneOf<List<FieldValidationResult>, Product>> AddProductAsync(ProductRequestDto productRequestDto);
+
+    public Task<List<Product>> GetProductsAsync();
 }
