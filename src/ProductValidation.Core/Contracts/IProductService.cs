@@ -1,8 +1,10 @@
-﻿using ProductValidation.Core.Models.Dtos;
+﻿using OneOf;
+using ProductValidation.Core.Models;
+using ProductValidation.Core.Models.Dtos;
 
 namespace ProductValidation.Core.Contracts;
 
 public interface IProductService
 {
-    public Task AddProductAsync(ProductRequestDto productRequestDto);
+    public Task<OneOf<List<FieldValidationResult>, Product>> AddProductAsync(ProductRequestDto productRequestDto);
 }
