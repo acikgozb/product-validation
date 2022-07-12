@@ -1,8 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using ProductValidation.Core.Contracts;
-using ProductValidation.Core.Models;
 using ProductValidation.Core.Models.Dtos;
-using ProductValidation.Core.Services;
 
 namespace ProductValidation.API.Controllers;
 
@@ -36,8 +34,12 @@ public class ProductsController : ControllerBase
             return BadRequest(validationResult);
         }
 
-        await _productService.AddProductAsync(productRequestDto);
-        
-        throw new NotImplementedException();
+        var response = await _productService.AddProductAsync(productRequestDto);
+
+        //TODO acikgozb: add proper URI once product read endpoint is implemented.
+        return response.Match<IActionResult>(
+            serviceValidationResult => BadRequest(serviceValidationResult),
+            addedProduct => Created("", addedProduct)
+        );
     }
 }
