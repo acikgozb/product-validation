@@ -40,6 +40,50 @@ namespace ProductValidation.API.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("BannedWords");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Brand = "nike",
+                            Value = "adidas"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Brand = "nike",
+                            Value = "under armour"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Brand = "nike",
+                            Value = "underarmour"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Brand = "adidas",
+                            Value = "nike"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Brand = "adidas",
+                            Value = "puma"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Brand = "apple",
+                            Value = "google"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Brand = "apple",
+                            Value = "microsoft"
+                        });
                 });
 
             modelBuilder.Entity("ProductValidation.Core.Models.BarcodeLength", b =>
@@ -54,12 +98,32 @@ namespace ProductValidation.API.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Length")
+                    b.Property<int>("Value")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.ToTable("BarcodeLengths");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Brand = "nike",
+                            Value = 12
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Brand = "adidas",
+                            Value = 15
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Brand = "apple",
+                            Value = 8
+                        });
                 });
 
             modelBuilder.Entity("ProductValidation.Core.Models.Product", b =>
