@@ -35,7 +35,7 @@ builder.Services.AddSwaggerGen(options =>
         Version = "v1",
         Title = "Product Validation API",
         Description =
-            "A Web API that showcases cross field and async validations of an example model by using Fluent Validation .NET library.",
+            "A Web API that showcases cross field and async validations on a simplified Product model by using Fluent Validation .NET library.",
     });
 
     var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
