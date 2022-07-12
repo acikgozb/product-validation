@@ -1,6 +1,7 @@
 using System.Net;
 using Microsoft.AspNetCore.Mvc;
 using ProductValidation.Core.Contracts;
+using ProductValidation.Core.Models;
 using ProductValidation.Core.Models.Dtos;
 
 namespace ProductValidation.API.Controllers;
@@ -20,7 +21,7 @@ public class ProductsController : ControllerBase
     }
 
     [HttpGet]
-    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(List<Product>), StatusCodes.Status200OK)]
     public async Task<IActionResult> GetProducts()
     {
         var products = await _productService.GetProductsAsync();
@@ -28,8 +29,8 @@ public class ProductsController : ControllerBase
     }
 
     [HttpGet("{id}")]
-    [ProducesResponseType(StatusCodes.Status404NotFound)]
-    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(List<FieldValidationResult>), StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(typeof(Product), StatusCodes.Status200OK)]
     public async Task<IActionResult> GetProductById(int id)
     {
         var product = await _productService.GetProductByIdAsync(id);
@@ -42,8 +43,8 @@ public class ProductsController : ControllerBase
     }
 
     [HttpPost]
-    [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    [ProducesResponseType(StatusCodes.Status201Created)]
+    [ProducesResponseType(typeof(List<FieldValidationResult>), StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(typeof(Product), StatusCodes.Status201Created)]
     public async Task<IActionResult> AddProduct(ProductRequestDto productRequestDto)
     {
         var validationResult = _productValidationService.ValidateProduct(productRequestDto);
@@ -56,7 +57,7 @@ public class ProductsController : ControllerBase
 
         return response.Match<IActionResult>(
             serviceValidationResult => BadRequest(serviceValidationResult),
-            addedProduct => CreatedAtAction(nameof(GetProductById), new {Id = addedProduct.Id}, addedProduct)
+            addedProduct => CreatedAtAction(nameof(GetProductById), new { Id = addedProduct.Id }, addedProduct)
         );
     }
 }
