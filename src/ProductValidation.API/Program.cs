@@ -1,6 +1,7 @@
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
 using ProductValidation.API.Filters;
 using ProductValidation.Core.Contracts;
 using ProductValidation.Core.Repository;
@@ -26,6 +27,17 @@ builder.Services.AddControllers(options =>
     options.Filters.Add<ModelBindingValidationActionFilter>();
 });
 
+builder.Services.AddSwaggerGen(options =>
+{
+    options.SwaggerDoc("v1", new OpenApiInfo
+    {
+        Version = "v1",
+        Title = "Product Validation API",
+        Description =
+            "A Web API that showcases cross field and async validations of an example model by using Fluent Validation .NET library.",
+    });
+});
+
 builder.Services.AddScoped<IModelValidator, ModelValidator>();
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<IProductValidationService, ProductValidationService>();
@@ -36,6 +48,12 @@ builder.Services.AddScoped<IBannedWordsDataGateway, BannedWordsDataGateway>();
 builder.Services.AddValidatorsFromAssemblyContaining<ProductRequestDtoValidator>();
 
 var app = builder.Build();
+
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
 
 app.UseHttpsRedirection();
 
