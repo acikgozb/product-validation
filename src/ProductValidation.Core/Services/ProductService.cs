@@ -1,23 +1,38 @@
-﻿using ProductValidation.Core.Contracts;
+﻿using OneOf;
+using ProductValidation.Core.Contracts;
 using ProductValidation.Core.Extensions;
+using ProductValidation.Core.Models;
 using ProductValidation.Core.Models.Dtos;
 
 namespace ProductValidation.Core.Services;
 
 public class ProductService : IProductService
 {
+    private readonly IProductDataGateway _productDataGateway;
     private readonly IProductValidationService _productValidationService;
+    private readonly IUnitOfWork _unitOfWork;
 
-    public ProductService(IProductValidationService productValidationService)
+    public ProductService(IProductValidationService productValidationService, IUnitOfWork unitOfWork,
+        IProductDataGateway productDataGateway)
     {
         _productValidationService = productValidationService;
+        _unitOfWork = unitOfWork;
+        _productDataGateway = productDataGateway;
     }
 
-    public async Task AddProductAsync(ProductRequestDto productRequestDto)
+    public async Task<OneOf<List<FieldValidationResult>, Product>> AddProductAsync(ProductRequestDto productRequestDto)
     {
-        //map to entity, then validate the entity.
         var productEntity = productRequestDto.ToEntity();
+
         var validationResult = await _productValidationService.ValidateProductAsync(productEntity);
-        throw new NotImplementedException();
+        if (validationResult.Count > 0)
+        {
+            return validationResult;
+        }
+
+        var addedProduct = _productDataGateway.AddProduct(productEntity);
+        await _unitOfWork.SaveChangesAsync();
+
+        return addedProduct;
     }
 }
