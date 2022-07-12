@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ProductValidation.API.Filters;
 using ProductValidation.Core.Contracts;
-using ProductValidation.Core.Models;
 using ProductValidation.Core.Repository;
 using ProductValidation.Core.Repository.DataGateways;
 using ProductValidation.Core.Services;
