@@ -31,6 +31,8 @@ builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<IProductValidationService, ProductValidationService>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IProductDataGateway, ProductDataGateway>();
+builder.Services.AddScoped<IBarcodeLengthDataGateway, BarcodeLengthDataGateway>();
+builder.Services.AddScoped<IBannedWordsDataGateway, BannedWordsDataGateway>();
 builder.Services.AddValidatorsFromAssemblyContaining<ProductRequestDtoValidator>();
 
 var app = builder.Build();
