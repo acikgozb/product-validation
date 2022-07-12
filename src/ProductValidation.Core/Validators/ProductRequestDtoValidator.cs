@@ -30,6 +30,6 @@ public class ProductRequestDtoValidator : AbstractValidator<ProductRequestDto>
 
         RuleFor(dto => dto.Description)
             .NotEmpty()
-            .WithMessage("This field cannot be empty");
+            .WithMessage("This field cannot be empty.");
     }
 }
