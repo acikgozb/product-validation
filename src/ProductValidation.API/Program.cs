@@ -1,3 +1,4 @@
+using System.Reflection;
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -36,6 +37,9 @@ builder.Services.AddSwaggerGen(options =>
         Description =
             "A Web API that showcases cross field and async validations of an example model by using Fluent Validation .NET library.",
     });
+
+    var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+    options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
 });
 
 builder.Services.AddScoped<IModelValidator, ModelValidator>();
