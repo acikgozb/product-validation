@@ -6,5 +6,5 @@ public class BarcodeLength
 
     public string Brand { get; set; }
 
-    public int Length { get; set; }
+    public int Value { get; set; }
 }
