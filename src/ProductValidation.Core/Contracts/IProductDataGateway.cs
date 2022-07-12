@@ -9,4 +9,6 @@ public interface IProductDataGateway
     Product AddProduct(Product product);
 
     Task<List<Product>> GetProductsAsync();
+
+    Task<Product?> GetProductByIdAsync(int id);
 }

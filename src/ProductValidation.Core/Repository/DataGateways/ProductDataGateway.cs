@@ -28,4 +28,9 @@ public class ProductDataGateway : IProductDataGateway
     {
         return _dbContext.Products.ToListAsync();
     }
+
+    public Task<Product?> GetProductByIdAsync(int id)
+    {
+        return _dbContext.Products.FirstOrDefaultAsync(p => p.Id == id);
+    }
 }

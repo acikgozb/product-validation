@@ -24,6 +24,18 @@ public class ProductsController : ControllerBase
         return Ok(products);
     }
 
+    [HttpGet("{id}")]
+    public async Task<IActionResult> GetProductById(int id)
+    {
+        var product = await _productService.GetProductByIdAsync(id);
+        if (product is null)
+        {
+            return NotFound();
+        }
+
+        return Ok(product);
+    }
+
     [HttpPost]
     [Consumes("application/json")]
     public async Task<IActionResult> AddProduct(ProductRequestDto productRequestDto)
@@ -39,7 +51,7 @@ public class ProductsController : ControllerBase
         //TODO acikgozb: add proper URI once product read endpoint is implemented.
         return response.Match<IActionResult>(
             serviceValidationResult => BadRequest(serviceValidationResult),
-            addedProduct => Created("", addedProduct)
+            addedProduct => CreatedAtAction(nameof(GetProductById), new {Id = addedProduct.Id}, addedProduct)
         );
     }
 }

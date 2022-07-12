@@ -40,4 +40,9 @@ public class ProductService : IProductService
     {
         return _productDataGateway.GetProductsAsync();
     }
+
+    public Task<Product?> GetProductByIdAsync(int id)
+    {
+        return _productDataGateway.GetProductByIdAsync(id);
+    }
 }
