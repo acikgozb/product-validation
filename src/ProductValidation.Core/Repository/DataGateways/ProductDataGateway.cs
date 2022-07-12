@@ -17,4 +17,10 @@ public class ProductDataGateway : IProductDataGateway
     {
         return _dbContext.Products.AnyAsync(product => product.Barcode == barcode);
     }
+
+    public Product AddProduct(Product product)
+    {
+        var productEntry = _dbContext.Products.Add(product);
+        return productEntry.Entity;
+    }
 }
