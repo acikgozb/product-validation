@@ -1,6 +1,10 @@
-﻿namespace ProductValidation.Core.Contracts;
+﻿using ProductValidation.Core.Models;
+
+namespace ProductValidation.Core.Contracts;
 
 public interface IProductDataGateway
 {
-    Task<bool> IsProductExistByBarcode(string barcode);
+    Task<bool> DoesProductExistByBarcodeAsync(string barcode);
+
+    Product AddProduct(Product product);
 }
