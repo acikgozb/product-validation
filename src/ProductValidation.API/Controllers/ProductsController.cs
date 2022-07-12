@@ -48,7 +48,6 @@ public class ProductsController : ControllerBase
 
         var response = await _productService.AddProductAsync(productRequestDto);
 
-        //TODO acikgozb: add proper URI once product read endpoint is implemented.
         return response.Match<IActionResult>(
             serviceValidationResult => BadRequest(serviceValidationResult),
             addedProduct => CreatedAtAction(nameof(GetProductById), new {Id = addedProduct.Id}, addedProduct)
