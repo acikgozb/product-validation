@@ -32,11 +32,37 @@ public class ProductValidator : AbstractValidator<Product>
                 $"The entered description contains a banned word '{_matchedBannedWord}', please change your product's description.");
     }
 
+    /// <summary>
+    /// Makes a call to target data gateway to find out whether the given barcode is unique or not. 
+    /// </summary>
+    /// <param name="barcode">(<c>string?</c>)</param>
+    /// <param name="cancellationToken">(<c>CancellationToken</c>) A token to notify whether the request is cancelled or not.</param>
+    /// <remarks>
+    /// The cancellation token logic is not implemented at this point.
+    /// </remarks>
+    /// <returns>
+    /// <c>true</c> - if given barcode is truly unique.<br />
+    /// <c>false</c> - if there is a product exist by given barcode.<br />
+    /// </returns>
     private async Task<bool> IsBarcodeUnique(string? barcode, CancellationToken cancellationToken)
     {
         return !await _productDataGateway.DoesProductExistByBarcodeAsync(barcode!);
     }
 
+    /// <summary>
+    /// Makes a call to target data gateway to get required length, and validates it with given barcode.
+    /// </summary>
+    /// <param name="product">(<c>Product</c>) user-submitted Product.</param>
+    /// <param name="barcode">(<c>string?</c>)</param>
+    /// <param name="cancellationToken">(<c>CancellationToken</c>) A token to notify whether the request is cancelled or not.</param>
+    /// <remarks>
+    /// The cancellation token logic is not implemented at this point.
+    /// If there is no length rule by provided brand, a default length rule (10) is applied to given barcode.
+    /// </remarks>
+    /// <returns>
+    /// <c>true</c> - if given barcode length matches with required length.<br />
+    /// <c>false</c> - if given barcode length does not match with required length.<br />
+    /// </returns>
     private async Task<bool> DoesBarcodeLengthMatch(Product product, string? barcode,
         CancellationToken cancellationToken)
     {
@@ -46,6 +72,19 @@ public class ProductValidator : AbstractValidator<Product>
         return barcode!.Length == _requiredBarcodeLength;
     }
 
+    /// <summary>
+    /// Makes a call to target data gateway to get a list of banned words, and validates it with given description.
+    /// </summary>
+    /// <param name="product">(<c>Product</c>) user-submitted Product.</param>
+    /// <param name="description">(<c>string?</c>)</param>
+    /// <param name="cancellationToken">(<c>CancellationToken</c>) A token to notify whether the request is cancelled or not.</param>
+    /// <remarks>
+    /// The cancellation token logic is not implemented at this point.
+    /// </remarks>
+    /// <returns>
+    /// <c>true</c> - if given description does not contain any banned word.<br />
+    /// <c>false</c> - if given description contains at least one banned word.<br />
+    /// </returns>
     private async Task<bool> DoesBannedWordExist(Product product, string? description,
         CancellationToken cancellationToken)
     {
