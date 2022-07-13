@@ -6,6 +6,7 @@ using ProductValidation.Core.Models.Dtos;
 
 namespace ProductValidation.API.Controllers;
 
+[ApiVersion("1.0")]
 [Route("api/products")]
 [ApiController]
 [Produces("application/json")]

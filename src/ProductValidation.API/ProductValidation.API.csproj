@@ -9,24 +9,25 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <Folder Include="Controllers"/>
+        <Folder Include="Controllers" />
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.1.0"/>
-        <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0-preview.5.22301.12"/>
-        <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0-preview.5.22301.12"/>
-        <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.6"/>
-        <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.0-preview.5.22302.2"/>
+        <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.1.0" />
+        <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="5.0.0" />
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0-preview.5.22301.12" />
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0-preview.5.22301.12" />
+        <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.6" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.0-preview.5.22302.2" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.0-preview.5.22302.2">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
-        <PackageReference Include="OneOf" Version="3.0.223"/>
-        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.3.1"/>
+        <PackageReference Include="OneOf" Version="3.0.223" />
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.3.1" />
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\ProductValidation.Core\ProductValidation.Core.csproj"/>
+        <ProjectReference Include="..\ProductValidation.Core\ProductValidation.Core.csproj" />
     </ItemGroup>
 </Project>
