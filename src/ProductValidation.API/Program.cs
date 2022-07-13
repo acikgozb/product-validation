@@ -51,6 +51,8 @@ builder.Services.AddApiVersioning(options =>
     options.AssumeDefaultVersionWhenUnspecified = true;
 });
 
+builder.Services.AddHealthChecks();
+
 builder.Services.AddScoped<IModelValidator, ModelValidator>();
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<IProductValidationService, ProductValidationService>();
@@ -67,6 +69,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.MapHealthChecks("/health");
 
 app.UseHttpsRedirection();
 
