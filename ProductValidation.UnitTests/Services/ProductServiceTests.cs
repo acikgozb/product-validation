@@ -1,6 +1,4 @@
-﻿using Castle.DynamicProxy;
-using Moq;
-using NuGet.Frameworks;
+﻿using Moq;
 using ProductValidation.Core.Contracts;
 using ProductValidation.Core.Models;
 using ProductValidation.Core.Models.Dtos;
@@ -93,15 +91,15 @@ public class ProductServiceTests : TestBase<ProductService>
             .Returns(Task.FromResult(true));
 
         var testResult = await ClassUnderTest.AddProductAsync(new ProductRequestDto());
-        
+
         Assert.StrictEqual(mockAddedProduct, testResult);
-        
+
         MockFor<IProductValidationService>()
             .Verify(dep => dep.ValidateProductAsync(It.IsAny<Product>()), Times.Once);
-        
+
         MockFor<IProductDataGateway>()
             .Verify(dep => dep.AddProduct(It.IsAny<Product>()), Times.Once);
-        
+
         MockFor<IUnitOfWork>()
             .Verify(dep => dep.SaveChangesAsync(), Times.Once);
     }
