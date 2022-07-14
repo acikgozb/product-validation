@@ -7,5 +7,9 @@
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=4a87ccfb_002D69d0_002D4662_002Dae0b_002D1eb760e0b1f3/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="ProductServiceTests" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;TestAncestor&gt;&#xD;
     &lt;TestId&gt;xUnit::128D4587-55DB-4791-BB54-6268F0A98FB7::net6.0::ProductValidation.UnitTests.Services.ProductServiceTests&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::128D4587-55DB-4791-BB54-6268F0A98FB7::net6.0::ProductValidation.UnitTests.Services.ModelValidatorServiceTest.Validate_Should_Throw_If_Required_Validator_Is_Not_Injected&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::128D4587-55DB-4791-BB54-6268F0A98FB7::net6.0::ProductValidation.UnitTests.Services.ModelValidatorServiceTest.Validate_Should_Return_Field_Validation_Results_As_List&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::128D4587-55DB-4791-BB54-6268F0A98FB7::net6.0::ProductValidation.UnitTests.Services.ModelValidatorServiceTest.ValidateAsync_Should_Throw_If_Required_Validator_Is_Not_Injected&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::128D4587-55DB-4791-BB54-6268F0A98FB7::net6.0::ProductValidation.UnitTests.Services.ModelValidatorServiceTest.ValidateAsync_Should_Return_Field_Validation_Results_As_List&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>
