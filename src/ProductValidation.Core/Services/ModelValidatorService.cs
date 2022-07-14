@@ -30,7 +30,12 @@ public class ModelValidatorService : IModelValidatorService
     public List<FieldValidationResult> Validate<T>(T modelToValidate)
     {
         var modelValidator = GetModelValidatorByType<T>();
-        ValidationResult validationResult = modelValidator!.Validate(modelToValidate);
+        if (modelValidator is null)
+        {
+            throw new NullValidatorException<T>();
+        }
+        
+        ValidationResult validationResult = modelValidator.Validate(modelToValidate);
         return ToFieldValidationResultList(validationResult);
     }
 
