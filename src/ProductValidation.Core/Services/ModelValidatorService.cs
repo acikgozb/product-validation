@@ -47,7 +47,6 @@ public class ModelValidatorService : IModelValidatorService
     /// [] <c>List</c> - if all fields are valid.
     /// </returns>
     //TODO: investigate whether it is possible to avoid using await.
-    //TODO: Throw exception if model validator is null - this should not happen and if it happens that means someone forgot to inject.
     public async Task<List<FieldValidationResult>> ValidateAsync<T>(T modelToValidate)
     {
         var modelValidator = GetModelValidatorByType<T>();
