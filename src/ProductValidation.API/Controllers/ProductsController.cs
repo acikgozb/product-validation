@@ -13,12 +13,12 @@ namespace ProductValidation.API.Controllers;
 public class ProductsController : ControllerBase
 {
     private readonly IProductService _productService;
-    private readonly IProductValidationService _productValidationService;
+    private readonly IModelValidatorService _modelValidatorService;
 
-    public ProductsController(IProductService productService, IProductValidationService productValidationService)
+    public ProductsController(IProductService productService, IModelValidatorService modelValidatorService)
     {
         _productService = productService;
-        _productValidationService = productValidationService;
+        _modelValidatorService = modelValidatorService;
     }
 
     /// <summary>
@@ -75,7 +75,7 @@ public class ProductsController : ControllerBase
     [ProducesResponseType(typeof(Product), StatusCodes.Status201Created)]
     public async Task<IActionResult> AddProduct(ProductRequestDto productRequestDto)
     {
-        var validationResult = _productValidationService.ValidateProduct(productRequestDto);
+        var validationResult = _modelValidatorService.Validate(productRequestDto);
         if (validationResult.Count > 0)
         {
             return BadRequest(validationResult);

@@ -9,15 +9,15 @@ namespace ProductValidation.Core.Services;
 public class ProductService : IProductService
 {
     private readonly IProductDataGateway _productDataGateway;
-    private readonly IProductValidationService _productValidationService;
+    private readonly IModelValidatorService _modelValidatorService;
     private readonly IUnitOfWork _unitOfWork;
 
-    public ProductService(IProductValidationService productValidationService, IUnitOfWork unitOfWork,
-        IProductDataGateway productDataGateway)
+    public ProductService(IUnitOfWork unitOfWork,
+        IProductDataGateway productDataGateway, IModelValidatorService modelValidatorService)
     {
-        _productValidationService = productValidationService;
         _unitOfWork = unitOfWork;
         _productDataGateway = productDataGateway;
+        _modelValidatorService = modelValidatorService;
     }
 
     /// <summary>
@@ -37,7 +37,7 @@ public class ProductService : IProductService
     {
         var productEntity = productRequestDto.ToEntity();
 
-        var validationResult = await _productValidationService.ValidateProductAsync(productEntity);
+        var validationResult = await _modelValidatorService.ValidateAsync(productEntity);
         if (validationResult.Count > 0)
         {
             return validationResult;

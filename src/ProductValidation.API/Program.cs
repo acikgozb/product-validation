@@ -53,9 +53,8 @@ builder.Services.AddApiVersioning(options =>
 
 builder.Services.AddHealthChecks();
 
-builder.Services.AddScoped<IModelValidator, ModelValidator>();
+builder.Services.AddScoped<IModelValidatorService, ModelValidatorService>();
 builder.Services.AddScoped<IProductService, ProductService>();
-builder.Services.AddScoped<IProductValidationService, ProductValidationService>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IProductDataGateway, ProductDataGateway>();
 builder.Services.AddScoped<IBarcodeLengthDataGateway, BarcodeLengthDataGateway>();
