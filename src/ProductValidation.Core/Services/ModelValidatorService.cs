@@ -1,6 +1,7 @@
 ﻿using FluentValidation;
 using FluentValidation.Results;
 using ProductValidation.Core.Contracts;
+using ProductValidation.Core.Exceptions;
 using ProductValidation.Core.Models;
 
 namespace ProductValidation.Core.Services;
@@ -32,7 +33,7 @@ public class ModelValidatorService : IModelValidatorService
         ValidationResult validationResult = modelValidator!.Validate(modelToValidate);
         return ToFieldValidationResultList(validationResult);
     }
-    
+
     /// <summary>
     /// Asynchronously validates the given model. 
     /// </summary>
@@ -46,10 +47,16 @@ public class ModelValidatorService : IModelValidatorService
     /// [] <c>List</c> - if all fields are valid.
     /// </returns>
     //TODO: investigate whether it is possible to avoid using await.
+    //TODO: Throw exception if model validator is null - this should not happen and if it happens that means someone forgot to inject.
     public async Task<List<FieldValidationResult>> ValidateAsync<T>(T modelToValidate)
     {
         var modelValidator = GetModelValidatorByType<T>();
-        ValidationResult validationResult = await modelValidator!.ValidateAsync(modelToValidate);
+        if (modelValidator is null)
+        {
+            throw new NullValidatorException<T>();
+        }
+
+        ValidationResult validationResult = await modelValidator.ValidateAsync(modelToValidate);
         return ToFieldValidationResultList(validationResult);
     }
 
@@ -65,7 +72,7 @@ public class ModelValidatorService : IModelValidatorService
     {
         return (IValidator<T>?)_serviceProvider.GetService(typeof(IValidator<T>));
     }
-    
+
     /// <summary>
     /// Transforms FluentValidation's <c>ValidationResult</c> type into <c>FieldValidationResult</c>. 
     /// </summary>
