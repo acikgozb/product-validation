@@ -54,16 +54,16 @@ public class ProductServiceTests : TestBase<ProductService>
             }
         };
 
-        MockFor<IProductValidationService>()
-            .Setup(dep => dep.ValidateProductAsync(It.IsAny<Product>()).Result)
+        MockFor<IModelValidatorService>()
+            .Setup(dep => dep.ValidateAsync(It.IsAny<Product>()).Result)
             .Returns(mockedProductValidationResult);
 
         var testResult = await ClassUnderTest.AddProductAsync(new ProductRequestDto());
 
         Assert.StrictEqual(mockedProductValidationResult, testResult);
 
-        MockFor<IProductValidationService>()
-            .Verify(dep => dep.ValidateProductAsync(It.IsAny<Product>()), Times.Once);
+        MockFor<IModelValidatorService>()
+            .Verify(dep => dep.ValidateAsync(It.IsAny<Product>()), Times.Once);
 
         MockFor<IProductDataGateway>()
             .Verify(dep => dep.AddProduct(It.IsAny<Product>()), Times.Never);
@@ -78,8 +78,8 @@ public class ProductServiceTests : TestBase<ProductService>
         var mockAddedProduct = new Product { Id = 1 };
         var validProductValidationErrors = new List<FieldValidationResult>();
 
-        MockFor<IProductValidationService>()
-            .Setup(dep => dep.ValidateProductAsync(It.IsAny<Product>()).Result)
+        MockFor<IModelValidatorService>()
+            .Setup(dep => dep.ValidateAsync(It.IsAny<Product>()).Result)
             .Returns(validProductValidationErrors);
 
         MockFor<IProductDataGateway>()
@@ -94,8 +94,8 @@ public class ProductServiceTests : TestBase<ProductService>
 
         Assert.StrictEqual(mockAddedProduct, testResult);
 
-        MockFor<IProductValidationService>()
-            .Verify(dep => dep.ValidateProductAsync(It.IsAny<Product>()), Times.Once);
+        MockFor<IModelValidatorService>()
+            .Verify(dep => dep.ValidateAsync(It.IsAny<Product>()), Times.Once);
 
         MockFor<IProductDataGateway>()
             .Verify(dep => dep.AddProduct(It.IsAny<Product>()), Times.Once);
