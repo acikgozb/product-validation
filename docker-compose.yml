@@ -6,3 +6,14 @@ services:
       dockerfile: "src/ProductValidation.API/Dockerfile"
     ports:
       - "8000:80"
+    depends_on:
+      - product-validation-db
+  product-validation-db:
+    build:
+      context: build/db
+      dockerfile: Dockerfile
+    environment:
+      - SA_PASSWORD=Pass@word
+      - ACCEPT_EULA=Y
+    ports:
+      - "8001:1433"

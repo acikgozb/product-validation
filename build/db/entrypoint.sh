@@ -1,0 +1,1 @@
+tail -f /dev/null & /setup_database.sh
