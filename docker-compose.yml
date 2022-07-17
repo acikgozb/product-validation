@@ -1,0 +1,8 @@
+version: "3.7"
+services:
+  product-validation-api:
+    build: 
+      context: .
+      dockerfile: "src/ProductValidation.API/Dockerfile"
+    ports:
+      - "8000:80"
