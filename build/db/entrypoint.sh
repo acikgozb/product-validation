@@ -1,1 +1,1 @@
-tail -f /dev/null & /setup_database.sh
+/opt/mssql/bin/sqlservr & /setup_database.sh & tail -f /dev/null
