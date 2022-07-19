@@ -19,6 +19,7 @@ public class ProductValidator : AbstractValidator<Product>
         _productDataGateway = productDataGateway;
         _barcodeLengthDataGateway = barcodeLengthDataGateway;
         _bannedWordsDataGateway = bannedWordsDataGateway;
+        
         RuleFor(p => p.Barcode)
             .MustAsync(IsBarcodeUnique)
             .WithMessage("A product with {PropertyValue} barcode already exists.")
